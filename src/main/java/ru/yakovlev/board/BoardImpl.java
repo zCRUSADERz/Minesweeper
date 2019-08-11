@@ -1,6 +1,7 @@
 package ru.yakovlev.board;
 
 import ru.yakovlev.board.cells.CellType;
+import ru.yakovlev.board.events.NewGameListener;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,7 +13,7 @@ import java.util.Set;
  *
  * @since 0.1
  */
-public class BoardImpl implements BoardPropertiesProvider {
+public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
 
     /**
      * Хранит состояние игровых ячеек.
@@ -52,11 +53,12 @@ public class BoardImpl implements BoardPropertiesProvider {
     }
 
     /**
-     * Приводит все внутренее состояние в соответствие с параметрами новой
-     * игровой доски.
-     * @param properties параметры новой игровой доски.
+     * Приводит все внутренее состояние в соответствие с параметрами нового
+     * игрового поля.
+     * @param properties параметры нового игрового поля.
      */
-    public final void newBoard(final BoardProperties properties) {
+    @Override
+    public final void newGame(final BoardProperties properties) {
         final int width = properties.width();
         final int height = properties.height();
         this.cells = new CellType[width][height];
