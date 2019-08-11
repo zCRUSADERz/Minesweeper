@@ -1,5 +1,7 @@
 package ru.yakovlev.board;
 
+import ru.yakovlev.board.cells.Cell;
+import ru.yakovlev.board.cells.CellFactory;
 import ru.yakovlev.board.cells.CellType;
 import ru.yakovlev.board.events.NewGameListener;
 
@@ -18,7 +20,7 @@ public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
     /**
      * Хранит состояние игровых ячеек.
      */
-    private CellType[][] cells;
+    private CellFactory[][] cells;
 
     /**
      * Количество бомб вокруг ячейки.
@@ -39,6 +41,12 @@ public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
         return new BoardProperties(
             this.cells.length, this.cells[0].length, this.bombs
         );
+    }
+
+    public final Cell cell(final BoardCoordinate coordinate) {
+        final CellFactory type = coordinate.find(this.cells);
+        final int bombsAround = coordinate.find(this.bombsInCell);
+        return type.cell(coordinate, bombsAround);
     }
 
     /**
@@ -64,7 +72,7 @@ public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
         this.cells = new CellType[width][height];
         this.bombsInCell = new int[width][height];
         this.bombs = properties.bombs();
-        for (CellType[] arr : this.cells) {
+        for (CellFactory[] arr : this.cells) {
             Arrays.fill(arr, CellType.UN_OPENED);
         }
     }

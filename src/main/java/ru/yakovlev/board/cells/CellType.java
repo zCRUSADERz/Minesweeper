@@ -1,11 +1,14 @@
 package ru.yakovlev.board.cells;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import ru.yakovlev.board.BoardCoordinate;
+
 /**
  * Все возможные типы ячеек.
  *
  * @since 0.1
  */
-public enum CellType {
+public enum CellType implements CellFactory {
 
     UN_OPENED,
 
@@ -24,5 +27,11 @@ public enum CellType {
      */
     NO_BOMB,
 
-    EXPLODED_BOMB
+    EXPLODED_BOMB;
+
+    //TODO Реализовать для каждого типа свой экземпляр ячейки.
+    @Override
+    public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+        return null;
+    }
 }
