@@ -6,6 +6,8 @@ import ru.yakovlev.board.cells.CellType;
 import ru.yakovlev.board.events.EventList;
 import ru.yakovlev.board.events.GameEvent;
 
+import java.util.stream.Stream;
+
 /**
  * Интерфейс игрового поля.
  *
@@ -14,6 +16,12 @@ import ru.yakovlev.board.events.GameEvent;
 public interface Board extends BoardPropertiesProvider {
 
     Cell cell(BoardCoordinate coordinate);
+
+    /**
+     * @param coordinate координата ячейки.
+     * @return ячейки находящиеся рядом с переданной координатой.
+     */
+    Stream<Cell> aroundCells(BoardCoordinate coordinate);
 
     /**
      * Выполнить действие пользователя.

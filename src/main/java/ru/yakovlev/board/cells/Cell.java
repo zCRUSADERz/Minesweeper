@@ -1,7 +1,11 @@
 package ru.yakovlev.board.cells;
 
+import ru.yakovlev.Images;
 import ru.yakovlev.board.Board;
+import ru.yakovlev.board.BoardCoordinate;
 import ru.yakovlev.board.events.EventList;
+
+import javax.swing.*;
 
 /**
  * Ячейка игрвого поля.
@@ -9,6 +13,20 @@ import ru.yakovlev.board.events.EventList;
  * @since 0.1
  */
 public interface Cell {
+
+    BoardCoordinate coordinate();
+
+    ImageIcon image(Images images);
+
+    boolean isNotOpen();
+
+    /**
+     * Ячейка является безопасной, если вокруг нее нет ни одной бомбы.
+     * @return true, если ячейка безопасная.
+     */
+    boolean isSafe();
+
+    boolean isFlag();
 
     /**
      * Открыть данную ячейку.
