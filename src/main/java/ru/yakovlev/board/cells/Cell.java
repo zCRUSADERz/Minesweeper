@@ -1,22 +1,14 @@
 package ru.yakovlev.board.cells;
 
-import ru.yakovlev.Images;
 import ru.yakovlev.board.Board;
-import ru.yakovlev.board.BoardCoordinate;
 import ru.yakovlev.board.events.EventList;
-
-import javax.swing.*;
 
 /**
  * Ячейка игрвого поля.
  *
  * @since 0.1
  */
-public interface Cell {
-
-    BoardCoordinate coordinate();
-
-    ImageIcon image(Images images);
+public interface Cell extends SimpleCell {
 
     boolean isNotOpen();
 
