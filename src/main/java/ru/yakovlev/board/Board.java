@@ -1,10 +1,8 @@
 package ru.yakovlev.board;
 
-import ru.yakovlev.board.actions.BoardAction;
 import ru.yakovlev.board.cells.Cell;
 import ru.yakovlev.board.cells.CellType;
 import ru.yakovlev.board.events.EventList;
-import ru.yakovlev.board.events.GameEvent;
 
 import java.util.stream.Stream;
 
@@ -22,13 +20,6 @@ public interface Board extends BoardPropertiesProvider {
      * @return ячейки находящиеся рядом с переданной координатой.
      */
     Stream<Cell> aroundCells(BoardCoordinate coordinate);
-
-    /**
-     * Выполнить действие пользователя.
-     * @param action действие над игровой доской.
-     * @return игровое событие порожденное данным действием.
-     */
-    GameEvent perform(BoardAction action);
 
     /**
      * Устанавливает новое значение типа ячейки по переданным координатам.
