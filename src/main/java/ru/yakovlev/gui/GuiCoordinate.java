@@ -1,5 +1,6 @@
 package ru.yakovlev.gui;
 
+import ru.yakovlev.Coordinate;
 import ru.yakovlev.board.BoardCoordinate;
 
 /**
@@ -7,13 +8,23 @@ import ru.yakovlev.board.BoardCoordinate;
  *
  * @since 0.1
  */
-public class Coordinate {
+public class GuiCoordinate implements Coordinate {
     private final int x;
     private final int y;
 
-    public Coordinate(final int x, final int y) {
+    public GuiCoordinate(final int x, final int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public final int getX() {
+        return this.x;
+    }
+
+    @Override
+    public final int getY() {
+        return this.y;
     }
 
     /**

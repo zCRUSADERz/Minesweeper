@@ -1,5 +1,7 @@
 package ru.yakovlev.board;
 
+import ru.yakovlev.Coordinate;
+
 import java.util.Objects;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Objects;
  *
  * @since 0.1
  */
-public class BoardCoordinate {
+public class BoardCoordinate implements Coordinate {
     private final int x;
     private final int y;
 
@@ -16,10 +18,12 @@ public class BoardCoordinate {
         this.y = y;
     }
 
+    @Override
     public final int getX() {
         return this.x;
     }
 
+    @Override
     public final int getY() {
         return this.y;
     }
