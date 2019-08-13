@@ -3,6 +3,7 @@ package ru.yakovlev.board;
 import ru.yakovlev.board.actions.BoardAction;
 import ru.yakovlev.board.cells.Cell;
 import ru.yakovlev.board.cells.CellType;
+import ru.yakovlev.board.cells.SimpleCell;
 import ru.yakovlev.board.events.EventList;
 import ru.yakovlev.board.events.GameEvent;
 import ru.yakovlev.board.events.GameFinishedListener;
@@ -19,7 +20,9 @@ import java.util.stream.Stream;
  *
  * @since 0.1
  */
-public class BoardState implements Board, NewGameListener, GameFinishedListener {
+public class BoardState
+    implements Board, SimpleBoard, NewGameListener, GameFinishedListener
+{
     private final BoardImpl board;
     /**
      * Игра считается начавшейся, когда пользователь выполнит первое действие
@@ -43,8 +46,24 @@ public class BoardState implements Board, NewGameListener, GameFinishedListener 
         return this.board.cell(coordinate);
     }
 
+    @Override
+    public Stream<SimpleCell> cells() {
+        final BoardProperties properties = this.boardProperties();
+        final Stream<BoardCoordinate> coordinates = properties.boardCoordinates();
+        return this.cells(coordinates)
+            .map(cell -> cell);
+    }
+
     public final Stream<Cell> cells(final Stream<BoardCoordinate> coordinates) {
         return coordinates.map(this::cell);
+    }
+
+    @Override
+    public Stream<Cell> aroundCells(final BoardCoordinate coordinate) {
+        final BoardProperties properties = this.boardProperties();
+        final Stream<BoardCoordinate> aroundCoordinates =
+            properties.coordinatesAround(coordinate);
+        return this.cells(aroundCoordinates);
     }
 
     /**
