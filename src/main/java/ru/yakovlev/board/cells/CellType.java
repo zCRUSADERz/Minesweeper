@@ -1,6 +1,5 @@
 package ru.yakovlev.board.cells;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import ru.yakovlev.board.BoardCoordinate;
 
 /**
@@ -10,28 +9,74 @@ import ru.yakovlev.board.BoardCoordinate;
  */
 public enum CellType implements CellFactory {
 
-    UN_OPENED,
+    UN_OPENED {
+        @Override
+        public final Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            final Cell result;
+            if (bombsAround == 0) {
+                result = new UnopenedSafeCell(coordinate);
+            } else {
+                result = new UnOpenedCellNearTheBomb(coordinate);
+            }
+            return result;
+        }
+    },
 
-    UN_OPENED_BOMB,
+    UN_OPENED_BOMB {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new UnOpenedBomb(coordinate);
+        }
+    },
 
-    FLAG,
+    FLAG {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new Flag(coordinate);
+        }
+    },
 
-    FLAG_ON_BOMB,
+    FLAG_ON_BOMB {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new FlagOnBomb(coordinate);
+        }
+    },
 
-    OPENED,
+    OPENED {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            final Cell result;
+            if (bombsAround == 0) {
+                result = new OpenedSafe(coordinate);
+            } else {
+                result = new OpenedCellNearTheBomb(coordinate, bombsAround);
+            }
+            return result;
+        }
+    },
 
-    BOMB,
+    BOMB {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new Bomb(coordinate);
+        }
+    },
 
     /**
      * Ошибочно поставленный флаг.
      */
-    NO_BOMB,
+    NO_BOMB {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new NoBomb(coordinate);
+        }
+    },
 
-    EXPLODED_BOMB;
-
-    //TODO Реализовать для каждого типа свой экземпляр ячейки.
-    @Override
-    public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
-        return null;
+    EXPLODED_BOMB {
+        @Override
+        public Cell cell(final BoardCoordinate coordinate, final int bombsAround) {
+            return new ExplodedBomb(coordinate);
+        }
     }
 }
