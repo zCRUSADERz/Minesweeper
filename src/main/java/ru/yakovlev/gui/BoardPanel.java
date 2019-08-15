@@ -32,6 +32,10 @@ public class BoardPanel extends JPanel
         this.imageSize = imageSize;
     }
 
+    public final int imageSize() {
+        return this.imageSize;
+    }
+
     @Override
     public final void newGame(final BoardProperties properties) {
         this.setPreferredSize(
