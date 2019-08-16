@@ -19,7 +19,6 @@ public class Images {
             new Function<String, ImageIcon>() {
                 @Override
                 public ImageIcon apply(final String s) {
-                    System.out.println(s);
                     return new ImageIcon(
                         getClass().getResource(String.format("/img/%s.png", s))
                     );
