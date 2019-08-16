@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="MenuNewGameItem" class="javax.swing.JMenuItem"/>
+  <bean id="MenuNewbieItem" class="javax.swing.JMenuItem"/>
+  <bean id="MenuFanItem" class="javax.swing.JMenuItem"/>
+  <bean id="MenuProfessionalItem" class="javax.swing.JMenuItem"/>
+  <bean id="MenuSpecialItem" class="javax.swing.JMenuItem"/>
+  <bean id="Menu" class="ru.yakovlev.gui.Menu">
+    <constructor-arg ref="MenuNewGameItem"/>
+    <constructor-arg ref="MenuNewbieItem"/>
+    <constructor-arg ref="MenuFanItem"/>
+    <constructor-arg ref="MenuProfessionalItem"/>
+    <constructor-arg ref="MenuSpecialItem"/>
+  </bean>
+
+  <bean id="ResetButton" class="ru.yakovlev.gui.ResetButton"/>
+  <bean id="TimerField" class="ru.yakovlev.gui.timer.TimerField"/>
+  <bean id="BombsField" class="ru.yakovlev.gui.BombsField"/>
+  <bean id="InfoPanel" class="ru.yakovlev.gui.InfoPanel">
+    <constructor-arg ref="TimerField"/>
+    <constructor-arg ref="ResetButton"/>
+    <constructor-arg ref="BombsField"/>
+  </bean>
+
+  <bean id="BoardImpl" class="ru.yakovlev.board.BoardImpl"/>
+  <bean id="BoardState" class="ru.yakovlev.board.BoardState">
+    <constructor-arg ref="BoardImpl"/>
+  </bean>
+  <bean id="BoardPanel" class="ru.yakovlev.gui.BoardPanel">
+    <constructor-arg ref="BoardState"/>
+    <constructor-arg type="int" value="30"/>
+  </bean>
+
+  <bean id="GameFrame" class="ru.yakovlev.gui.GameFrame">
+    <constructor-arg ref="Menu"/>
+    <constructor-arg ref="InfoPanel"/>
+    <constructor-arg ref="BoardPanel"/>
+  </bean>
+
+
+  <bean id="DefeatObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.board.events.DefeatListener">
+        <ref bean="ResetButton"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.board.events.DefeatListener"/>
+  </bean>
+
+
+  <bean id="FlagEventObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.board.events.FlagEventListener">
+        <ref bean="BombsField"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.board.events.FlagEventListener"/>
+  </bean>
+
+
+  <bean id="GameFinishedObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.board.events.GameFinishedListener">
+        <ref bean="TimerField"/>
+        <ref bean="BoardState"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.board.events.GameFinishedListener"/>
+  </bean>
+
+
+  <bean id="MouseEventOnBoardObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.board.events.MouseEventOnBoardListener">
+        <ref bean="ResetButton"/>
+        <ref bean="BoardPanel"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.board.events.MouseEventOnBoardListener"/>
+  </bean>
+
+
+  <bean id="NewGameObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.board.events.NewGameListener">
+        <ref bean="BoardImpl"/>
+        <ref bean="BoardState"/>
+        <ref bean="ResetButton"/>
+        <ref bean="BombsField"/>
+        <ref bean="BoardPanel"/>
+        <ref bean="TimerField"/>
+        <ref bean="GameFrame"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.board.events.NewGameListener"/>
+  </bean>
+
+
+  <bean id="ObserversLocator" class="ru.yakovlev.ObserversLocator">
+    <constructor-arg>
+      <list>
+        <ref bean="DefeatObserver"/>
+        <ref bean="FlagEventObserver"/>
+        <ref bean="GameFinishedObserver"/>
+        <ref bean="MouseEventOnBoardObserver"/>
+        <ref bean="NewGameObserver"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+
+  <bean id="ResetButtonListener" class="ru.yakovlev.gui.listeners.NewGameListener">
+    <constructor-arg ref="ResetButton"/>
+    <constructor-arg ref="BoardState"/>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+
+
+  <bean id="MenuNewGameItemListener" class="ru.yakovlev.gui.listeners.NewGameListener">
+    <constructor-arg ref="MenuNewGameItem"/>
+    <constructor-arg ref="BoardState"/>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+
+  <bean id="NewbieBoardProperties" class="ru.yakovlev.board.BoardProperties">
+    <constructor-arg type="int" value="9"/>
+    <constructor-arg type="int" value="9"/>
+    <constructor-arg type="int" value="10"/>
+  </bean>
+  <bean id="MenuNewbieItemListener" class="ru.yakovlev.gui.listeners.NewGameWithPropsListener">
+    <constructor-arg ref="MenuNewbieItem"/>
+    <constructor-arg ref="NewbieBoardProperties"/>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+
+
+  <bean id="MenuFanItemListener" class="ru.yakovlev.gui.listeners.NewGameWithPropsListener">
+    <constructor-arg ref="MenuFanItem"/>
+    <constructor-arg>
+      <bean class="ru.yakovlev.board.BoardProperties">
+        <constructor-arg type="int" value="16"/>
+        <constructor-arg type="int" value="16"/>
+        <constructor-arg type="int" value="40"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+  <bean id="MenuProfessionalItemListener" class="ru.yakovlev.gui.listeners.NewGameWithPropsListener">
+    <constructor-arg ref="MenuProfessionalItem"/>
+    <constructor-arg>
+      <bean class="ru.yakovlev.board.BoardProperties">
+        <constructor-arg type="int" value="30"/>
+        <constructor-arg type="int" value="16"/>
+        <constructor-arg type="int" value="99"/>
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+  <bean id="MenuSpecialItemListener" class="ru.yakovlev.gui.listeners.NewGameSpecialListener">
+    <constructor-arg ref="MenuSpecialItem"/>
+    <constructor-arg ref="BoardState"/>
+    <constructor-arg ref="NewGameObserver"/>
+  </bean>
+  <bean id="BoardListener" class="ru.yakovlev.gui.listeners.BoardListener">
+    <constructor-arg ref="BoardPanel"/>
+    <constructor-arg ref="BoardState"/>
+    <constructor-arg ref="ObserversLocator"/>
+  </bean>
+
+  <bean id="InitializingComponentObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.InitializingComponent">
+        <ref bean="Menu"/>
+        <ref bean="ResetButton"/>
+        <ref bean="TimerField"/>
+        <ref bean="BombsField"/>
+        <ref bean="InfoPanel"/>
+        <ref bean="GameFrame"/>
+        <ref bean="ResetButtonListener"/>
+        <ref bean="MenuNewGameItemListener"/>
+        <ref bean="MenuNewbieItemListener"/>
+        <ref bean="MenuFanItemListener"/>
+        <ref bean="MenuProfessionalItemListener"/>
+        <ref bean="MenuSpecialItemListener"/>
+        <ref bean="BoardListener"/>
+        <bean class="ru.yakovlev.App">
+          <constructor-arg ref="NewGameObserver"/>
+          <constructor-arg ref="NewbieBoardProperties"/>
+        </bean>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.InitializingComponent"/>
+  </bean>
+</beans>
