@@ -1,5 +1,7 @@
 package ru.yakovlev;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.yakovlev.board.BoardProperties;
 import ru.yakovlev.board.events.NewGameListener;
 
@@ -18,6 +20,16 @@ final class App implements InitializingComponent {
     ) {
         this.observer = observer;
         this.properties = properties;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void main(String[] args) {
+        final ApplicationContext context = new ClassPathXmlApplicationContext(
+            "spring/app-context.xml"
+        );
+        final Observer<InitializingComponent> newGameObserver =
+            (Observer<InitializingComponent>) context.getBean("InitializingComponentObserver");
+        newGameObserver.apply(InitializingComponent::init);
     }
 
     @Override
