@@ -1,9 +1,9 @@
 # Minesweeper
 
 <p align="middle">
-  <img src="../master/images/Minesweeper.png" />  
-  <img src="../master/images/Minesweeper-2.png" /> 
-  <img src="../master/images/Minesweeper-3.png" /> 
+  <img src="https://user-images.githubusercontent.com/34595022/63502173-3237e180-c4f7-11e9-8283-491fc863a271.png" />  
+  <img src="https://user-images.githubusercontent.com/34595022/63502180-349a3b80-c4f7-11e9-8e4a-f4d666ee0505.png" /> 
+  <img src="https://user-images.githubusercontent.com/34595022/63502186-382dc280-c4f7-11e9-9172-8615da693c2d.png" /> 
 </p>
 
 ## How to play
