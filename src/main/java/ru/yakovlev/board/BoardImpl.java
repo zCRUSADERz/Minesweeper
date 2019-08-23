@@ -93,18 +93,13 @@ public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
         final int height = this.cells[0].length;
         int counter = 0;
         while (counter < this.bombs) {
-            final int randomX = random.nextInt(width);
-            final int randomY;
-            if (randomX == coordinate.getX()) {
-                int nextY;
-                do {
-                    nextY = random.nextInt(height);
-                } while (nextY == coordinate.getY());
-                randomY = nextY;
-            } else {
-                randomY = random.nextInt(height);
-            }
-            if (coordinates.add(new BoardCoordinate(randomX, randomY))) {
+            BoardCoordinate randomCoordinate;
+            do {
+                randomCoordinate = new BoardCoordinate(
+                    random.nextInt(width), random.nextInt(height)
+                );
+            } while (coordinate.equals(randomCoordinate));
+            if (coordinates.add(randomCoordinate)) {
                 counter += 1;
             }
         }
