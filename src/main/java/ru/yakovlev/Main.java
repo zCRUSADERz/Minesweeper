@@ -10,11 +10,11 @@ import ru.yakovlev.board.events.NewGameListener;
  *
  * @since 0.1
  */
-final class App implements InitializingComponent {
+final class Main implements InitializingComponent {
     private final Observer<NewGameListener> observer;
     private final BoardProperties properties;
 
-    public App(
+    public Main(
         final Observer<NewGameListener> observer,
         final BoardProperties properties
     ) {

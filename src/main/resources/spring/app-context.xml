@@ -186,7 +186,7 @@
         <ref bean="MenuProfessionalItemListener"/>
         <ref bean="MenuSpecialItemListener"/>
         <ref bean="BoardListener"/>
-        <bean class="ru.yakovlev.App">
+        <bean class="ru.yakovlev.Main">
           <constructor-arg ref="NewGameObserver"/>
           <constructor-arg ref="NewbieBoardProperties"/>
         </bean>
