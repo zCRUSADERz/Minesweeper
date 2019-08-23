@@ -9,12 +9,12 @@
 ## How to play
 
 ```sh
-$ wget https://github.com/zCRUSADERz/Minesweeper/releases/download/0.1/Minesweeper.jar
+$ wget https://github.com/zCRUSADERz/Minesweeper/releases/download/0.1.1/Minesweeper.jar
 $ java -jar Minesweeper.jar
 ```
 
 and play !
 
-For **Windows**, simply download [this](https://github.com/zCRUSADERz/Minesweeper/releases/download/0.1/Minesweeper.jar) jar file and run it with `java -jar Minesweeper.jar`.
+For **Windows**, simply download [this](https://github.com/zCRUSADERz/Minesweeper/releases/download/0.1.1/Minesweeper.jar) jar file and run it with `java -jar Minesweeper.jar`.
 
 **Please do report issues in case of a bug.**
