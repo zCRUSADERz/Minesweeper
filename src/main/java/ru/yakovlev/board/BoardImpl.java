@@ -1,5 +1,6 @@
 package ru.yakovlev.board;
 
+import org.springframework.stereotype.Component;
 import ru.yakovlev.board.cells.Cell;
 import ru.yakovlev.board.cells.CellFactory;
 import ru.yakovlev.board.cells.CellType;
@@ -15,6 +16,7 @@ import java.util.Set;
  *
  * @since 0.1
  */
+@Component
 public class BoardImpl implements BoardPropertiesProvider, NewGameListener {
 
     /**

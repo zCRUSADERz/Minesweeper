@@ -1,5 +1,7 @@
 package ru.yakovlev.gui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yakovlev.Coordinate;
 import ru.yakovlev.Images;
 import ru.yakovlev.board.BoardProperties;
@@ -13,15 +15,17 @@ import java.awt.*;
 /**
  * @since 0.1
  */
+@Component
 public class BoardPanel extends JPanel
     implements NewGameListener, MouseEventOnBoardListener
 {
     private final SimpleBoard board;
     private final Images images;
-    private final int imageSize;
+    private final Integer imageSize;
 
-    public BoardPanel(final SimpleBoard board, final int imageSize) {
-        this(board, new Images(), imageSize);
+    @Autowired
+    public BoardPanel(final SimpleBoard boardState, final Integer imageSize) {
+        this(boardState, new Images(), imageSize);
     }
 
     public BoardPanel(

@@ -7,6 +7,9 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
+  <bean id="imageSize" class="java.lang.Integer">
+    <constructor-arg value="30"/>
+  </bean>
   <bean id="newGameItem" class="javax.swing.JMenuItem"/>
   <bean id="newbieItem" class="javax.swing.JMenuItem"/>
   <bean id="fanItem" class="javax.swing.JMenuItem"/>

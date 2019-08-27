@@ -1,5 +1,7 @@
 package ru.yakovlev.board;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yakovlev.board.actions.BoardAction;
 import ru.yakovlev.board.cells.Cell;
 import ru.yakovlev.board.cells.CellType;
@@ -20,6 +22,7 @@ import java.util.stream.Stream;
  *
  * @since 0.1
  */
+@Component
 public class BoardState
     implements Board, SimpleBoard, NewGameListener, GameFinishedListener
 {
@@ -32,6 +35,7 @@ public class BoardState
     private int openedCounter = 0;
     private boolean gameFinished = false;
 
+    @Autowired
     public BoardState(final BoardImpl board) {
         this.board = board;
     }
