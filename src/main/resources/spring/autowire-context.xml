@@ -72,6 +72,18 @@
     <constructor-arg value="ru.yakovlev.board.events.NewGameListener"/>
   </bean>
 
+  <bean id="ObserversLocator" class="ru.yakovlev.ObserversLocator">
+    <constructor-arg>
+      <list>
+        <ref bean="defeatObserver"/>
+        <ref bean="flagEventObserver"/>
+        <ref bean="gameFinishedObserver"/>
+        <ref bean="mouseEventOnBoardObserver"/>
+        <ref bean="newGameObserver"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
   <bean id="newbieMenuItemListener" class="ru.yakovlev.gui.listeners.NewGameWithPropsListener">
     <constructor-arg ref="newbieMenuItem"/>
     <constructor-arg ref="newbieBoardProperties"/>
@@ -98,6 +110,26 @@
       </bean>
     </constructor-arg>
     <constructor-arg ref="newGameObserver"/>
+  </bean>
+  <bean id="initializingComponentObserver" class="ru.yakovlev.Observer">
+    <constructor-arg>
+      <list value-type="ru.yakovlev.InitializingComponent">
+        <ref bean="menu"/>
+        <ref bean="resetButton"/>
+        <ref bean="timerField"/>
+        <ref bean="bombsField"/>
+        <ref bean="infoPanel"/>
+        <ref bean="gameFrame"/>
+        <ref bean="newGameListener"/>
+        <ref bean="newbieMenuItemListener"/>
+        <ref bean="fanMenuItemListener"/>
+        <ref bean="professionalMenuItemListener"/>
+        <ref bean="newGameSpecialListener"/>
+        <ref bean="boardListener"/>
+        <ref bean="main"/>
+      </list>
+    </constructor-arg>
+    <constructor-arg value="ru.yakovlev.InitializingComponent"/>
   </bean>
   <context:component-scan base-package="ru.yakovlev"/>
 </beans>
