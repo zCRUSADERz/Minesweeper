@@ -12,19 +12,20 @@ import java.awt.*;
  *
  * @since 0.1
  */
+@org.springframework.stereotype.Component
 public class GameFrame extends JFrame
     implements NewGameListener, InitializingComponent
 {
-    private final Menu menu;
-    private final InfoPanel infoPanel;
-    private final BoardPanel board;
+    private final JMenuBar menu;
+    private final Component infoPanel;
+    private final Component boardPanel;
 
     public GameFrame(
-        final Menu menu, final InfoPanel panel, final BoardPanel board
+        final Menu menu, final InfoPanel panel, final BoardPanel boardPanel
     ) {
         this.menu = menu;
         this.infoPanel = panel;
-        this.board = board;
+        this.boardPanel = boardPanel;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class GameFrame extends JFrame
                 BorderFactory.createLoweredBevelBorder()
             )
         );
-        border.add(this.board);
+        border.add(this.boardPanel);
         this.add(border, BorderLayout.CENTER);
     }
 

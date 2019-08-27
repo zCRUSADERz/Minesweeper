@@ -1,5 +1,8 @@
 package ru.yakovlev.gui.listeners;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ru.yakovlev.InitializingComponent;
 import ru.yakovlev.Observer;
 import ru.yakovlev.board.BoardProperties;
@@ -17,6 +20,7 @@ import java.awt.event.ActionListener;
  *
  * @since 0.1
  */
+@Component
 public class NewGameSpecialListener
     implements ActionListener, InitializingComponent
 {
@@ -24,9 +28,12 @@ public class NewGameSpecialListener
     private final BoardPropertiesProvider boardPropertiesProvider;
     private final Observer<NewGameListener> observer;
 
+    @Autowired
     public NewGameSpecialListener(
-        final AbstractButton component,
+        @Qualifier(value = "specialMenuItem") final AbstractButton component,
+        @Qualifier(value = "boardImpl")
         final BoardPropertiesProvider boardPropertiesProvider,
+        @Qualifier(value = "newGameObserver")
         final Observer<NewGameListener> observer
     ) {
         this.component = component;

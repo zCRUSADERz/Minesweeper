@@ -1,6 +1,7 @@
 package ru.yakovlev.gui;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import ru.yakovlev.Coordinate;
 import ru.yakovlev.Images;
@@ -24,7 +25,10 @@ public class BoardPanel extends JPanel
     private final Integer imageSize;
 
     @Autowired
-    public BoardPanel(final SimpleBoard boardState, final Integer imageSize) {
+    public BoardPanel(
+        @Qualifier(value = "boardState") final SimpleBoard boardState,
+        final Integer imageSize
+    ) {
         this(boardState, new Images(), imageSize);
     }
 

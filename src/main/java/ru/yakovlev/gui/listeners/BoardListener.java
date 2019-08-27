@@ -1,5 +1,8 @@
 package ru.yakovlev.gui.listeners;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import ru.yakovlev.InitializingComponent;
 import ru.yakovlev.ObserversLocator;
 import ru.yakovlev.board.BoardCoordinate;
@@ -19,18 +22,21 @@ import java.awt.event.MouseEvent;
  *
  * @since 0.1
  */
+@Component
 public class BoardListener extends MouseAdapter implements InitializingComponent {
     private final BoardPanel boardPanel;
     private final SimpleBoard board;
     private final ObserversLocator locator;
 
+    @Autowired
     public BoardListener(
-        final BoardPanel panel, final SimpleBoard board,
-        final ObserversLocator locator
+        final BoardPanel boardPanel,
+        @Qualifier(value = "boardState") final SimpleBoard board,
+        final ObserversLocator observersLocator
     ) {
-        boardPanel = panel;
+        this.boardPanel = boardPanel;
         this.board = board;
-        this.locator = locator;
+        this.locator = observersLocator;
     }
 
     @Override

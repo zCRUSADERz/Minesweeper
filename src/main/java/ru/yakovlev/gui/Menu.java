@@ -21,15 +21,15 @@ public class Menu extends JMenuBar implements InitializingComponent {
 
     @Autowired
     public Menu(
-        final JMenuItem newGameItem, final JMenuItem newbieItem,
-        final JMenuItem fanItem, final JMenuItem professionalItem,
-        final JMenuItem specialItem
+        final JMenuItem newGameMenuItem, final JMenuItem newbieMenuItem,
+        final JMenuItem fanMenuItem, final JMenuItem professionalMenuItem,
+        final JMenuItem specialMenuItem
     ) {
-        this.newGame = newGameItem;
-        this.newbie = newbieItem;
-        this.fan = fanItem;
-        this.professional = professionalItem;
-        this.special = specialItem;
+        this.newGame = newGameMenuItem;
+        this.newbie = newbieMenuItem;
+        this.fan = fanMenuItem;
+        this.professional = professionalMenuItem;
+        this.special = specialMenuItem;
     }
 
     public final void init() {
