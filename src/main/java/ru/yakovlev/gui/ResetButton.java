@@ -1,5 +1,6 @@
 package ru.yakovlev.gui;
 
+import org.springframework.stereotype.Component;
 import ru.yakovlev.Images;
 import ru.yakovlev.InitializingComponent;
 import ru.yakovlev.board.BoardProperties;
@@ -16,6 +17,7 @@ import javax.swing.*;
  *
  * @since 0.1
  */
+@Component
 public class ResetButton extends JButton implements NewGameListener,
     DefeatListener, MouseEventOnBoardListener, InitializingComponent
 {
@@ -32,8 +34,8 @@ public class ResetButton extends JButton implements NewGameListener,
 
     @Override
     public final void init() {
-        this.updateIcon();
         this.setBorder(BorderFactory.createLoweredBevelBorder());
+        this.updateIcon();
     }
 
     @Override

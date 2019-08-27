@@ -1,5 +1,6 @@
 package ru.yakovlev.gui.timer;
 
+import org.springframework.stereotype.Component;
 import ru.yakovlev.InitializingComponent;
 import ru.yakovlev.board.BoardProperties;
 import ru.yakovlev.board.events.GameFinishedListener;
@@ -15,6 +16,7 @@ import java.awt.*;
  *
  * @since 0.1
  */
+@Component
 public class TimerField extends JTextField
     implements NewGameListener, GameFinishedListener, InitializingComponent
 {
