@@ -1,5 +1,7 @@
 package ru.yakovlev.gui;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yakovlev.InitializingComponent;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.*;
  *
  * @since 0.1
  */
+@Component
 public class Menu extends JMenuBar implements InitializingComponent {
     private final JMenuItem newGame;
     private final JMenuItem newbie;
@@ -16,15 +19,17 @@ public class Menu extends JMenuBar implements InitializingComponent {
     private final JMenuItem professional;
     private final JMenuItem special;
 
+    @Autowired
     public Menu(
-        final JMenuItem newGame, final JMenuItem newbie, final JMenuItem fan,
-        final JMenuItem professional, final JMenuItem special
+        final JMenuItem newGameItem, final JMenuItem newbieItem,
+        final JMenuItem fanItem, final JMenuItem professionalItem,
+        final JMenuItem specialItem
     ) {
-        this.newGame = newGame;
-        this.newbie = newbie;
-        this.fan = fan;
-        this.professional = professional;
-        this.special = special;
+        this.newGame = newGameItem;
+        this.newbie = newbieItem;
+        this.fan = fanItem;
+        this.professional = professionalItem;
+        this.special = specialItem;
     }
 
     public final void init() {
