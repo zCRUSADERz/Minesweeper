@@ -2,10 +2,14 @@ package ru.yakovlev;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import ru.yakovlev.board.BoardProperties;
 import ru.yakovlev.board.events.NewGameListener;
+import ru.yakovlev.spring.ApplicationConfig;
+
+import java.util.List;
+
 
 /**
  * Точка входа приложения.
@@ -13,7 +17,7 @@ import ru.yakovlev.board.events.NewGameListener;
  * @since 0.1
  */
 @Component
-final class Main implements InitializingComponent {
+public class Main implements InitializingComponent {
     private final Observer<NewGameListener> observer;
     private final BoardProperties properties;
 
@@ -29,12 +33,12 @@ final class Main implements InitializingComponent {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-        final ApplicationContext context = new ClassPathXmlApplicationContext(
-            "spring/autowire-context.xml"
+        final ApplicationContext context = new AnnotationConfigApplicationContext(
+            ApplicationConfig.class
         );
-        final Observer<InitializingComponent> initializingComponentObserver =
-            (Observer<InitializingComponent>) context.getBean("initializingComponentObserver");
-        initializingComponentObserver.apply(InitializingComponent::init);
+        final List<InitializingComponent> components =
+            (List<InitializingComponent>) context.getBean("initializingComponents");
+        components.forEach(InitializingComponent::init);
     }
 
     @Override
